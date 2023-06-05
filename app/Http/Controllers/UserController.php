@@ -3,22 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    /*
+        Permission
+    */
+    function __construct()
+    {
+         $this->middleware('can:user list', ['only' => ['index','show']]);
+         $this->middleware('can:user create', ['only' => ['create','store']]);
+         $this->middleware('can:user edit', ['only' => ['edit','update']]);
+         $this->middleware('can:user delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        $title = "Manage Users";
         $users = User::all();
-        return view('users.index', compact('users'));
+        $breadcrumb = '<li class="breadcrumb-item"><a href="'.URL::route('users.index').'"> Users </a></li>';
+        return view('users.index', compact('users', 'title', 'breadcrumb'));
     }
 
     /**
@@ -28,9 +42,12 @@ class UserController extends Controller
     {
         //
         $user = new User();
-        $action = URL::route('users.index');
+        $action = URL::route('users.store');
         $title = "Create User";
-        return view('users.index', compact('user', 'action', 'title'));
+        $roles = Role::all();
+        $userHasRoles = [];
+        $breadcrumb = '<li class="breadcrumb-item"><a href="'.URL::route('users.create').'"> Create User </a></li>';
+        return view('users.edit', compact('user', 'action', 'title', 'roles', 'breadcrumb', 'userHasRoles'));
     }
 
     /**
@@ -47,6 +64,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'gender' => 'nullable',
+            'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
         ]);
 
         if ($validator->fails()) {
@@ -59,7 +77,7 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $user['avatar'] = ($request->hasFile('avatar'))? $imageName : Auth::user()->avatar;
+        $user['avatar'] = ($request->hasFile('avatar'))? $imageName : null;
         $user['first_name'] = $request->first_name ?? null;
         $user['middle_name'] = $request->middle_name ?? null;
         $user['last_name'] = $request->last_name ?? null;
@@ -67,9 +85,13 @@ class UserController extends Controller
         $user['email'] = $request->email;
         $user['password'] = (Auth::user()->password !== $request->password)? Hash::make($request->password) : $request->password;
         $user['gender'] = $request->gender ?? null;
+        $user['date_of_birth'] = $request->date_of_birth ?? null;
 
         if ($user->save()) {
-            return back()->with('success', 'Profile Updated Successfully');
+            if(! empty($request->roles)) {
+                $user->assignRole($request->roles);
+            }
+            return redirect()->route('users.edit')->with('success', 'Profile Updated Successfully');
         }
 
         return back()->with('danger', 'Somethings Goes Wrong');
@@ -81,6 +103,10 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+        $title = "User Show";
+        $roles = Role::all();
+        $userHasRoles = array_column(json_decode($user->roles, true), 'id');
+        return view('users.view', compact('user', 'title', 'roles', 'userHasRoles'));
     }
 
     /**
@@ -89,9 +115,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        $action = URL::route('users.index');
-        $title = "Create User";
-        return view('users.index', compact('user', 'action', 'title'));
+        $roles = Role::all();
+        $userHasRoles = array_column(json_decode($user->roles, true), 'id');
+        $action = URL::route('users.update', $user->id);
+        $title = "Edit User";
+        return view('users.edit', compact('user', 'action', 'title', 'roles', 'userHasRoles'));
     }
 
     /**
@@ -108,6 +136,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'gender' => 'nullable',
+            'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
         ]);
 
         if ($validator->fails()) {
@@ -127,9 +156,12 @@ class UserController extends Controller
         $user['email'] = $request->email;
         $user['password'] = (Auth::user()->password !== $request->password)? Hash::make($request->password) : $request->password;
         $user['gender'] = $request->gender ?? null;
+        $user['date_of_birth'] = $request->date_of_birth ?? null;
 
         if ($user->save()) {
-            return back()->with('success', 'Profile Updated Successfully');
+            $roles = $request->roles ?? [];
+            $user->syncRole($roles);
+            return redirect()->route('users.show', $user->id)->with('success', 'Profile Updated Successfully');
         }
 
         return back()->with('danger', 'Somethings Goes Wrong');

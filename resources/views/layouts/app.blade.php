@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>Admin Pannel::{{ $title ?? '' }}</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -19,7 +19,7 @@
         content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ $images ?? asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -128,8 +128,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('user.dashboard') }}">
-                            <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                        <a href="{{ route('dashboard') }}">
+                            <img class="img-fluid" src="{{ asset('assets/images/logo.png') }}" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -210,7 +210,7 @@
                             </li>
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="{{ Auth::user()->avatar ?? 'assets/images/avatar-4.jpg' }}"
+                                    <img src="{{ Auth::user()->avatar ?? asset('assets/images/no-image.jpg') }}"
                                         class="img-radius" alt="User-Profile-Image">
                                     <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
                                     <i class="ti-angle-down"></i>
@@ -222,7 +222,7 @@
                                         </a>
                                     </li>
                                     <li class="waves-effect waves-light">
-                                        <a href="{{ route('user.profile') }}">
+                                        <a href="{{ route('profile.edit') }}">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
@@ -237,9 +237,12 @@
                                         </a>
                                     </li>
                                     <li class="waves-effect waves-light">
-                                        <a href="{{ route('user.logout') }}">
-                                            <i class="ti-layout-sidebar-left"></i> Logout
-                                        </a>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                            <button type="submit" class="form-control">
+                                                <i class="ti-layout-sidebar-left"></i> Logout
+                                            </button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -258,17 +261,16 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Dashboard</h5>
+                                            <h5 class="m-b-10">{{ $title ?? '' }}</h5>
                                             <p class="m-b-0">Welcome to Mega Able</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="{{ route('dashboard') }}"> <i class="fa fa-home"> Home </i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Dashboard</a>
-                                            </li>
+                                            {!! $breadcrumb ?? null !!}
                                         </ul>
                                     </div>
                                 </div>
@@ -333,7 +335,7 @@
     <!-- Required Jquery -->
     <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js"') }}></script>
+    <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/pages/widget/excanvas.js') }}"></script>
     <!-- waves js -->
@@ -343,7 +345,7 @@
     <!-- modernizr js -->
     <script type="text/javascript" src="{{ asset('assets/js/modernizr/modernizr.js') }}"></script>
     <!-- slimscroll js -->
-    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/SmoothScroll.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <!-- Chart js -->
     <script type="text/javascript" src="{{ asset('assets/js/chart.js/Chart.js') }}"></script>
@@ -373,6 +375,17 @@
 
     @yield('script')
 
+    {{-- <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+     <!-- Page Heading -->
+     {{-- @if (isset($header))
+     <header class="bg-white shadow">
+         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+             {{ $header }}
+         </div>
+     </header>
+ @endif --}}
 </body>
 
 </html>
