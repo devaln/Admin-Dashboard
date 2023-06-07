@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('content')
     <div class="card">
-        <a href="{{ route('users.index') }}" class="btn btn-dark float-right"><i class="la la-arrow-circle-o-left"><span>
+        <a href="{{ route('users.index') }}" class="btn btn-inverse waves-light waves-effect col-sm-1 float-right"><i class="la la-arrow-circle-o-left"><span>
             Back</span></i></a>
         <div class="card-header">
             <h5 class="card-title float-left">View Users</h5>
             <div class="card-header-right">
-                <div class="dropdown-danger dropdown open">
-                    <button class="btn btn-danger dropdown-toggle waves-effect waves-light" type="button" id="dropdown-6"
+                <div class="dropdown-primary dropdown open">
+                    <button class="btn btn-dark dropdown-toggle waves-effect waves-light" type="button" id="dropdown-6"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Danger</button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-6" data-dropdown-in="fadeIn"
                         data-dropdown-out="fadeOut">
-                        <a class="dropdown-item waves-light waves-effect" href="#">Action</a>
-                        <a class="dropdown-item waves-light waves-effect" href="#">Another action</a>
-                        <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                            <a class="dropdown-item waves-light waves-effect" href="{{ route('users.create') }}">Create User</a>
+                            <a class="dropdown-item waves-light waves-effect" href="{{ route('users.show', $user->id) }}">View User</a>
+                            <a class="dropdown-item waves-light waves-effect" href="{{ route('users.edit', $user->id) }}">Edit User</a>
                     </div>
                 </div>
             </div>

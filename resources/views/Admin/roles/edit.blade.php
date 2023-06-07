@@ -46,14 +46,14 @@
                                 </i> :message</span>',
                             ) !!}
                         </div>
-                    </div>
+                    </div><hr>
 
                     <div class="form-group inline">
                         <h4 class="col-sm-3 p-3"><strong> Select Permission :</strong></h4>
                         @forelse ($permissions as $permission)
                         <label class="col-sm-2 col-form-label">
                             <div class="">
-                                <input type="checkbox" value="{{ $permission->name }}"
+                                <input type="checkbox" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }}
                                     class="form-control col-lg-6" placeholder="Guard Name" name="permissions[]">
                                 <span>{{ $permission->name }}</span>
                             </div>
@@ -61,7 +61,7 @@
                         @empty
                         ----
                         @endforelse
-                    </div>
+                    </div><hr>
                 </div>
                 <div class="form-group-btn float-right">
                     <a type="button" href="{{ route('roles.index') }}"

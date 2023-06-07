@@ -42,35 +42,43 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+
             <li class="pcoded-hasmenu">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>c</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Components</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
                         <a href="{{ route('users.index') }}" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-micon"><i class="ti-user"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Manage Users</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class=" ">
                         <a href="{{ route('permissions.index') }}" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Permission</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class=" ">
                         <a href="{{ route('roles.index') }}" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-micon"><i class="ti-pencil-alt2"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Roles</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('setting.edit', 1) }}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-settings"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="">setting</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
             </li>
         </ul>
     </div>

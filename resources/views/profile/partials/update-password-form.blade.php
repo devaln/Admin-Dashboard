@@ -62,13 +62,7 @@
         <div class="button-group">
             <button class="btn btn-mat waves-effect waves-light btn-primary" type="submit"><i class="ti-save">{{ __(' Save ') }}</i></button>
             @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <p class="text-sm text-gray-600">{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>

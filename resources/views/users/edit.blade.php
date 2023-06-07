@@ -5,7 +5,8 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-10">
-                    <h1 class="sub-title"><strong><h4> {{ $title }} </h4></strong></h1>
+                    <h5 class="sub-title"><strong><h3> {{ $title }} </h3></strong></h5>
+                    <p><strong>{{ $user->first_name ?? '' }} {{ $user->last_name ?? '' }}</strong></p>
                 </div>
                 <div class="col-sm-2">
                     <a type="button" href="{{ route('users.index') }}" class="btn waves-effect waves-light btn-dark btn-outline-dark float-right"><i class="ti-arrow-circle-left"> Back </i></a>
@@ -142,52 +143,36 @@
                         <div class="col-sm-10">
                             <input type="date" id="date_of_birth" class="form-control col-lg-6"
                                 placeholder="date_of_birth" value="{{ old('date_of_birth', $user->date_of_birth) }}"
-                                name="date_of_birth" required>
+                                name="date_of_birth" >
                             {!! $errors->first(
                                 'date_of_birth',
                                 '<span class="alert-msg text-danger" aria-hidden="true"><i class="ti-info-alt" aria-hidden="true">
                                 </i> :message</span>',
                             ) !!}
                         </div>
-                    </div>
+                    </div><hr>
 
-                    {{-- <div class="py-2">
-                        <h3 class="inline-block text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200 py-4 block sm:inline-block flex">Roles</h3>
-                        <div class="grid grid-cols-4 gap-4">
-                            @forelse ($roles as $role)
-                                <div class="col-span-4 sm:col-span-2 md:col-span-1">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="roles[]" value="{{ $role->name }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                        {{ $role->name }}
-                                    </label>
-                                </div>
-                            @empty
-                                ----
-                            @endforelse
-                        </div>
-                    </div> --}}
-                    <div class="py-2">
-                        <h3 class="inline-block text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200 py-4 block sm:inline-block flex">Roles</h3>
-                        <div class="grid grid-cols-4 gap-4">
-                            @forelse ($roles as $role)
-                                <div class="col-span-4 sm:col-span-2 md:col-span-1">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="roles[]" value="{{ $role->name }}" {{ in_array($role->id, $userHasRoles) ? 'checked' : '' }} class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                        {{ $role->name }}
-                                    </label>
-                                </div>
-                            @empty
-                                ----
-                            @endforelse
-                        </div>
-                    </div>
+                    <div class="form-group inline">
+                        <h4 class="col-sm-3 p-3"><strong> Select Roles :</strong></h4>
+                        @forelse ($roles as $role)
+                        <label class="col-sm-2 col-form-label">
+                            <div class="">
+                                <input type="checkbox" value="{{ $role->name }}" {{ in_array($role->id, $userHasRoles) ? 'checked' : '' }}
+                                    class="form-control col-lg-6" placeholder="Guard Name" name="permissions[]">
+                                <span>{{ $role->name }}</span>
+                            </div>
+                        </label>
+                        @empty
+                        ----
+                        @endforelse
+                    </div><hr>
 
                 </div>
                 <div class="form-group-btn float-right">
                     <a type="button" href="{{ route('users.index') }}"
                         class="btn btn-mat waves-effect waves-light btn-danger"><i class="ti-close"> Cancel </i></a>
                     <button type="submit" class="btn btn-mat waves-effect waves-light btn-success"><i class="ti-save">
-                            Save </i></button>
+                        Save </i></button>
                 </div>
             </form>
         </div>

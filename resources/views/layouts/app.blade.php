@@ -19,7 +19,7 @@
         content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="{{ $images ?? asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ App\Models\Setting::setting()->favicon ?? asset('assets/images/newlogo.jpg') }}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -128,9 +128,21 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('dashboard') }}">
-                            <img class="img-fluid" src="{{ asset('assets/images/logo.png') }}" alt="Theme-Logo" />
+
+                        @if (App\Models\Setting::setting()->type === 'Logo + Text')
+                        <a href="{{ route('dashboard') }}" class="">
+                            <img class="img-fluid" src="{{ App\Models\Setting::setting()->logo ?? asset('assets/images/logo.png') }}" alt="site_Logo" width="50px" height="50px"/><b> {{ App\Models\Setting::setting()->site_name ?? '' }} </b>
                         </a>
+                        @elseif (App\Models\Setting::setting()->type === 'Logo')
+                        <a href="{{ route('dashboard') }}">
+                            <img class="img-fluid" src="{{ App\Models\Setting::setting()->logo ?? asset('assets/images/logo.png') }}" alt="site_Logo" width="100px" height="100px"/>
+                        </a>
+                        @else
+                        <a href="{{ route('dashboard') }}" class="p-5">
+                            <b class="text-bold"> {{ App\Models\Setting::setting()->site_name ?? '' }} </b>
+                        </a>
+                        @endif
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
@@ -282,6 +294,15 @@
                             <!-- Main-body start -->
                             @yield('content')
                         </div>
+                        <div class="pcoded-footer-content">
+                            <div class="card mb-0">
+                                <div class="card-block">
+                                    <div class="text-center">
+                                        {{ App\Models\Setting::setting()->footer }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -362,6 +383,7 @@
     <!-- custom js -->
     <script type="text/javascript" src="{{ asset('assets/pages/dashboard/custom-dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/script.js')}} "></script>
+    <script type="text/javascript" src="{{ asset('assets/js/deletebutton.js')}} "></script>
     {{-- datatabels --}}
     <script type="text/javascript" src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 

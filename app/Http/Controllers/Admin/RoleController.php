@@ -37,7 +37,8 @@ class RoleController extends Controller
         $role = new Role();
         $action = URL::route('roles.store');
         $permissions = Permission::all();
-        return view('Admin.roles.edit', compact('title', 'role', 'action', 'permissions'));
+        $roleHasPermissions = [];
+        return view('Admin.roles.edit', compact('title', 'role', 'action', 'permissions', 'roleHasPermissions'));
     }
     /*
         Edit
@@ -47,7 +48,8 @@ class RoleController extends Controller
         $title = "User Role Edit";
         $action = URL::route('roles.update', $role->id);
         $permissions = Permission::all();
-        return view('Admin.roles.edit', compact('title', 'role', 'action', 'permissions'));
+        $roleHasPermissions = array_column(json_decode($role->permissions, true), 'id');
+        return view('Admin.roles.edit', compact('title', 'role', 'action', 'permissions', 'roleHasPermissions'));
     }
     /*
         Show
@@ -99,10 +101,9 @@ class RoleController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $role['name'] = $request->name;
-        $role['guard_name'] = $request->guard_name;
-
-        if ($role->save()) {
+        if ($role->update($request->all())) {
+            $permissions = $request->permissions ?? [];
+            $role->syncPermissions($permissions);
             return redirect()->route('roles.index')->with('success', 'Role Created Successfully');
         }
         return back()->with('danger', 'Something Goes Wrong');

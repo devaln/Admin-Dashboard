@@ -64,6 +64,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'gender' => 'nullable',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
         ]);
 
@@ -87,11 +88,12 @@ class UserController extends Controller
         $user['gender'] = $request->gender ?? null;
         $user['date_of_birth'] = $request->date_of_birth ?? null;
 
+        // dd($request->permissions);
         if ($user->save()) {
-            if(! empty($request->roles)) {
-                $user->assignRole($request->roles);
+            if(! empty($request->permissions)) {
+                $user->assignRole($request->permissions);
             }
-            return redirect()->route('users.edit')->with('success', 'Profile Updated Successfully');
+            return redirect()->route('users.edit', $user->id)->with('success', 'Profile Updated Successfully');
         }
 
         return back()->with('danger', 'Somethings Goes Wrong');
@@ -136,6 +138,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'gender' => 'nullable',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
         ]);
 
@@ -148,7 +151,7 @@ class UserController extends Controller
             $request->avatar->move(public_path('images/profile'), $imageName);
         }
 
-        $user['avatar'] = ($request->hasFile('avatar'))? $imageName : Auth::user()->avatar;
+        $user['avatar'] = ($request->hasFile('avatar'))? $imageName : $user->avatar;
         $user['first_name'] = $request->first_name ?? null;
         $user['middle_name'] = $request->middle_name ?? null;
         $user['last_name'] = $request->last_name ?? null;
@@ -159,8 +162,9 @@ class UserController extends Controller
         $user['date_of_birth'] = $request->date_of_birth ?? null;
 
         if ($user->save()) {
-            $roles = $request->roles ?? [];
-            $user->syncRole($roles);
+            $roles = $request->permissions ?? [];
+            // dd($roles);
+            $user->syncRoles($roles);
             return redirect()->route('users.show', $user->id)->with('success', 'Profile Updated Successfully');
         }
 

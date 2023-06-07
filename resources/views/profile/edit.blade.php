@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h5><strong><h4> Profile </h4></strong></h5>
+        <h5> Profile </h5>
     </div>
     <div class="card-block">
         <div class="card">
@@ -16,4 +16,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        $('#profileimg').click(function() {
+            $('#profimg').click();
+        });
+
+        function preview() {
+            profileimg.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 @endsection

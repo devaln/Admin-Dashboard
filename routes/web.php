@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,11 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    $title = "DashBoard";
+    return view('dashboard', compact('title'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $title = "DashBoard";
+    return view('dashboard', compact('title'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,4 +36,5 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::resource('users', UserController::class);
+    Route::resource('setting', SettingController::class);
 });

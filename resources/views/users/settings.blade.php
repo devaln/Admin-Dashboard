@@ -7,12 +7,12 @@
                     <h1 class="sub-title"><strong><h4> {{ $title }} </h4></strong></h1>
                 </div>
                 <div class="col-sm-2">
-                    <a type="button" href="{{ route('user.dashboard') }}" class="btn waves-effect waves-light btn-dark btn-outline-dark float-right"><i class="ti-arrow-circle-left"> Back </i></a>
+                    <a type="button" href="{{ route('dashboard') }}" class="btn waves-effect waves-light btn-dark btn-outline-dark float-right"><i class="ti-arrow-circle-left"> Back </i></a>
                 </div>
             </div>
         </div>
         <div class="card-block">
-            <form action="{{ route('settings.update', $setting->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('setting.update', $setting->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if ($setting->id)
                     @method('PUT')
@@ -60,7 +60,7 @@
                         <label for="first_name" class="col-sm-2 col-form-label">First Name :</label>
                         <div class="col-sm-10">
                             <select type="text" id="first_name" value="{{ old('first_name', $setting->type) }}"
-                                name="first_name" placeholder="First Name" required autofocus class="form-control col-lg-6">
+                                name="type" placeholder="First Name" required autofocus class="form-control col-lg-6">
                                 <option selected>{{ ($setting->type)? $setting->type : 'Choose Which type suites' }}</option>
                                 <option value="Logo">Logo</option>
                                 <option value="Text">Text</option>

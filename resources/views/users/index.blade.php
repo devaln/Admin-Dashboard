@@ -55,7 +55,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-sm"
-                                            onclick="return confirm('Do you really want to delete this users!')">
+                                            onclick="deleteConfirm(event)">
                                             <i class="ti-trash"></i></button>
                                         @endcan
                                     </form>
@@ -73,5 +73,22 @@
 @section('script')
     <script>
         let table = new DataTable('#users');
+        import swal from 'sweetalert2';
+window.deleteConfirm = function (e) {
+    e.preventDefault();
+    var form = e.target.form;
+    swal({
+        title: "Are you sure you want to delete?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+      });
+}
     </script>
 @endsection
+{{-- return confirm('Do you really want to delete this users!') --}}

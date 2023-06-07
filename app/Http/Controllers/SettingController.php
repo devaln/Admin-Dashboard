@@ -42,13 +42,13 @@ class SettingController extends Controller
         }
 
         if ($request->hasFile('favicon')) {
-            $favicon = '/images/profile/' . time() . '.' . uniqid() . '.' . $request->favicon->extension();
-            $request->favicon->move(public_path('images/profile'), $favicon);
+            $favicon = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->favicon->extension();
+            $request->favicon->move(public_path('images/setting'), $favicon);
         }
 
         if ($request->hasFile('logo')) {
-            $logo = '/images/profile/' . time() . '.' . uniqid() . '.' . $request->logo->extension();
-            $request->logo->move(public_path('images/profile'), $logo);
+            $logo = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->logo->extension();
+            $request->logo->move(public_path('images/setting'), $logo);
         }
 
         $setting = new Setting();
@@ -82,13 +82,13 @@ class SettingController extends Controller
         }
 
         if ($request->hasFile('favicon')) {
-            $favicon = '/images/profile/' . time() . '.' . uniqid() . '.' . $request->favicon->extension();
-            $request->favicon->move(public_path('images/profile'), $favicon);
+            $favicon = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->favicon->extension();
+            $request->favicon->move(public_path('images/setting'), $favicon);
         }
 
         if ($request->hasFile('logo')) {
-            $logo = '/images/profile/' . time() . '.' . uniqid() . '.' . $request->logo->extension();
-            $request->logo->move(public_path('images/profile'), $logo);
+            $logo = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->logo->extension();
+            $request->logo->move(public_path('images/setting'), $logo);
         }
 
         $setting['site_name'] = $request->site_name;
