@@ -45,7 +45,7 @@
                                                 style="max-width: 160px;max-height: 160px;border: 2px solid black">
                                             <input type="file" onchange="preview()" accept="image/*" id="profimg"
                                                 style="display: none" name="logo"><br>
-                                            <p>Click on image to change the profile image.</p>
+                                            <p>Click on image to change the logo.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                                 style="max-width: 160px;max-height: 160px;border: 2px solid black">
                                             <input type="file" onchange="preview2()" accept="image/*" id="site-favicon"
                                                 style="display: none" name="favicon"><br>
-                                            <p>Click on image to change the profile image.</p>
+                                            <p>Click on image to change the favicon.</p>
                                         </div>
                                     </div>
                                 </div>

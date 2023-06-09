@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
@@ -19,22 +20,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $title = "DashBoard";
     return view('dashboard', compact('title'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'locked'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     $title = "DashBoard";
     return view('dashboard', compact('title'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'locked'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('locked', [AuthenticatedSessionController::class, 'get'])->name('locked');
+
+    Route::post('locked/check', [AuthenticatedSessionController::class, 'post'])->name('locked.check');
 });
 
 require __DIR__.'/auth.php';
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'locked'], 'prefix' => 'admin'], function () {
     Route::resource('users', UserController::class);
     Route::resource('setting', SettingController::class);
 });

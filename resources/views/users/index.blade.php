@@ -53,9 +53,9 @@
                                         @can('user delete')
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
+                                        <button type="button"
                                             class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-sm"
-                                            onclick="deleteConfirm(event)">
+                                            onclick="deleteConfirm()">
                                             <i class="ti-trash"></i></button>
                                         @endcan
                                     </form>
@@ -73,22 +73,25 @@
 @section('script')
     <script>
         let table = new DataTable('#users');
-        import swal from 'sweetalert2';
-window.deleteConfirm = function (e) {
-    e.preventDefault();
-    var form = e.target.form;
-    swal({
-        title: "Are you sure you want to delete?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-            form.submit();
+        function deleteConfirm() {
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+            })
         }
-      });
-}
     </script>
 @endsection
 {{-- return confirm('Do you really want to delete this users!') --}}

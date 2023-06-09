@@ -60,8 +60,8 @@ class UserController extends Controller
             'first_name' => 'nullable|min:3',
             'middle_name' => 'nullable|min:3',
             'last_name' => 'nullable|min:3',
-            'phone' => 'nullable|min:10|max:13',
-            'email' => 'required|email',
+            'phone' => 'nullable|min:10|max:13|unique:users,phone',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'gender' => 'nullable',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -91,7 +91,7 @@ class UserController extends Controller
         // dd($request->permissions);
         if ($user->save()) {
             if(! empty($request->permissions)) {
-                $user->assignRole($request->permissions);
+                $user->assignRoles($request->permissions);
             }
             return redirect()->route('users.edit', $user->id)->with('success', 'Profile Updated Successfully');
         }
@@ -157,7 +157,7 @@ class UserController extends Controller
         $user['last_name'] = $request->last_name ?? null;
         $user['phone'] = $request->phone ?? null;
         $user['email'] = $request->email;
-        $user['password'] = (Auth::user()->password !== $request->password)? Hash::make($request->password) : $request->password;
+        $user['password'] = ($user->password !== $request->password)? Hash::make($request->password) : $request->password;
         $user['gender'] = $request->gender ?? null;
         $user['date_of_birth'] = $request->date_of_birth ?? null;
 

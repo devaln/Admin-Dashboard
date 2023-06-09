@@ -22,9 +22,10 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $pro_user = $request->user();
+        $title = "User Profile Edit";
         $roles = Role::all();
         $userHasRoles = array_column(json_decode($pro_user->roles, true), 'id');
-        return view('profile.edit', compact('pro_user', 'roles', 'userHasRoles'));
+        return view('profile.edit', compact('pro_user', 'title', 'roles', 'userHasRoles'));
     }
 
     /**

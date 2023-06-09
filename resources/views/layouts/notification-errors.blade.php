@@ -34,34 +34,34 @@
 {{-- danger Message --}}
 @elseif ($message = Session::get('danger'))
     <script>
-        $(window).on('load', function() {
-            //Welcome Message (not for login page)
-            function notify($message, type) {
-                $.growl({
-                    message: message
-                }, {
-                    type: type,
-                    allow_dismiss: true,
-                    label: 'Cancel',
-                    className: 'btn-xs btn-success',
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    },
-                    delay: 2500,
-                    animate: {
-                        enter: 'animated fadeInRight',
-                        exit: 'animated fadeOutRight'
-                    },
-                    offset: {
-                        x: 30,
-                        y: 30
-                    }
-                });
-            };
+    $(window).on('load', function() {
+        //Welcome Message (not for login page)
+        function notify(type) {
+            $.growl({
+                message: '<strong>{{ $message }}</strong>'
+            }, {
+                type: type,
+                allow_dismiss: true,
+                label: 'Cancel',
+                className: 'btn-xs btn-danger',
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                },
+                delay: 2500,
+                animate: {
+                    enter: 'animated fadeInRight',
+                    exit: 'animated fadeOutRight'
+                },
+                offset: {
+                    x: 30,
+                    y: 30
+                }
+            });
+        };
 
-            notify($message, 'danger');
-        });
+        notify('success');
+    });
     </script>
 
 {{-- Primary Message --}}
@@ -69,14 +69,14 @@
     <script>
         $(window).on('load', function() {
             //Welcome Message (not for login page)
-            function notify($message, type) {
+            function notify(type) {
                 $.growl({
-                    message: message
+                    message: '<strong>{{ $message }}</strong>'
                 }, {
                     type: type,
                     allow_dismiss: true,
                     label: 'Cancel',
-                    className: 'btn-xs btn-success',
+                    className: 'btn-xs btn-primary',
                     placement: {
                         from: 'top',
                         align: 'right'
@@ -93,7 +93,7 @@
                 });
             };
 
-            notify($message, 'primary');
+            notify('success');
         });
     </script>
 
@@ -101,34 +101,34 @@
 {{-- Info Message --}}
 @elseif ($message = Session::get('info'))
     <script>
-        $(window).on('load', function() {
-            //Welcome Message (not for login page)
-            function notify($message, type) {
-                $.growl({
-                    message: message
-                }, {
-                    type: type,
-                    allow_dismiss: true,
-                    label: 'Cancel',
-                    className: 'btn-xs btn-success',
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    },
-                    delay: 2500,
-                    animate: {
-                        enter: 'animated fadeInRight',
-                        exit: 'animated fadeOutRight'
-                    },
-                    offset: {
-                        x: 30,
-                        y: 30
-                    }
-                });
-            };
+    $(window).on('load', function() {
+        //Welcome Message (not for login page)
+        function notify(type) {
+            $.growl({
+                message: '<strong>{{ $message }}</strong>'
+            }, {
+                type: type,
+                allow_dismiss: true,
+                label: 'Cancel',
+                className: 'btn-xs btn-info',
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                },
+                delay: 2500,
+                animate: {
+                    enter: 'animated fadeInRight',
+                    exit: 'animated fadeOutRight'
+                },
+                offset: {
+                    x: 30,
+                    y: 30
+                }
+            });
+        };
 
-            notify($message, 'info');
-        });
+        notify('success');
+    });
     </script>
 
 
@@ -137,14 +137,14 @@
     <script>
         $(window).on('load', function() {
             //Welcome Message (not for login page)
-            function notify($message, type) {
+            function notify(type) {
                 $.growl({
-                    message: message
+                    message: '<strong>{{ $message }}</strong>'
                 }, {
                     type: type,
                     allow_dismiss: true,
                     label: 'Cancel',
-                    className: 'btn-xs btn-success',
+                    className: 'btn-xs btn-inverse',
                     placement: {
                         from: 'top',
                         align: 'right'
@@ -161,7 +161,7 @@
                 });
             };
 
-            notify($message, 'inverse');
+            notify('success');
         });
     </script>
 
@@ -171,14 +171,14 @@
     <script>
         $(window).on('load', function() {
             //Welcome Message (not for login page)
-            function notify($message, type) {
+            function notify(type) {
                 $.growl({
-                    message: message
+                    message: '<strong>{{ $message }}</strong>'
                 }, {
                     type: type,
                     allow_dismiss: true,
                     label: 'Cancel',
-                    className: 'btn-xs btn-success',
+                    className: 'btn-xs btn-secondary',
                     placement: {
                         from: 'top',
                         align: 'right'
@@ -195,10 +195,9 @@
                 });
             };
 
-            notify($message, 'secondary');
+            notify('success');
         });
     </script>
-
 
 {{-- secondary Message --}}
 @elseif ($message = $errors->any())

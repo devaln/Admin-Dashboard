@@ -50,7 +50,7 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class=" ">
+                    <li class="">
                         <a href="{{ route('users.index') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-user"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Manage Users</span>

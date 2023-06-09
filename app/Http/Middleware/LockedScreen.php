@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyAuth
+class LockedScreen
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class VerifyAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            return $next($request);
-        } else {
-            return redirect('/login');
+        if ($request->session()->has('locked')) {
+            return redirect()->route('locked');
         }
+        // if ( time() - Session::get('last_activity') >= 600 ) {
+        //     return redirect()->route('locked');
+        // }
+        return $next($request);
     }
 }

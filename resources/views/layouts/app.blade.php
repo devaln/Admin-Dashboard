@@ -48,7 +48,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/notification/notification.css') }}">
     <!-- Animate.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css/css/animate.css') }}">
-
+    {{-- SweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 
     @yield('style')
 </head>
@@ -229,7 +231,7 @@
                                 </a>
                                 <ul class="show-notification profile-notification">
                                     <li class="waves-effect waves-light">
-                                        <a href="#!">
+                                        <a href="{{ route('setting.edit', App\Models\Setting::setting()->id ) }}">
                                             <i class="ti-settings"></i> Settings
                                         </a>
                                     </li>
@@ -244,7 +246,7 @@
                                         </a>
                                     </li>
                                     <li class="waves-effect waves-light">
-                                        <a href="#">
+                                        <a href="{{ route('locked') }}">
                                             <i class="ti-lock"></i> Lock Screen
                                         </a>
                                     </li>
@@ -298,7 +300,7 @@
                             <div class="card mb-0">
                                 <div class="card-block">
                                     <div class="text-center">
-                                        {{ App\Models\Setting::setting()->footer }}
+                                        {!! App\Models\Setting::setting()->footer !!}
                                     </div>
                                 </div>
                             </div>
@@ -391,6 +393,9 @@
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/pages/notification/notification.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    {{-- sweetAlert --}}
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
     <!-- Custom js -->
     {{-- <script type="text/javascript" src="assets/js/script.js"></script> --}}
     @include('layouts.notification-errors')

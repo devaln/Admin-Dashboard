@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -65,5 +66,13 @@ class PermissionSeeder extends Seeder
             'email' => 'sachin@gmail.com',
         ]);
         $user->assignRole($role1);
+
+        Setting::created([
+            'site_name' => 'ADMIN-PANEL',
+            'favicon' => 'assets/images/newlogo.jpg',
+            'logo' => 'assets/images/newlogo.jpg',
+            'type' => 'Logo',
+            'footer' => '<a href="/">@Welcome TO Our Site</a>',
+        ]);
     }
 }
