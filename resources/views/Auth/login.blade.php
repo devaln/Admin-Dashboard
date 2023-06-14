@@ -25,6 +25,11 @@
                             <input type="text" name="email" class="form-control" required="" autofocus>
                             <span class="form-bar"></span>
                             <label class="float-label">Your Email Address</label>
+                            {!! $errors->first(
+                                'email',
+                                '<span class="alert-msg text-danger" aria-hidden="true"><i class="ti-info-alt" aria-hidden="true">
+                                </i> :message</span>',
+                            ) !!}
                         </div>
 
                         {{-- Password --}}
@@ -32,6 +37,11 @@
                             <input type="password" name="password" class="form-control" required="">
                             <span class="form-bar"></span>
                             <label class="float-label">Password</label>
+                            {!! $errors->first(
+                                'password',
+                                '<span class="alert-msg text-danger" aria-hidden="true"><i class="ti-info-alt" aria-hidden="true">
+                                </i> :message</span>',
+                            ) !!}
                         </div>
                         <div class="row m-t-25 text-left">
                             <div class="col-12">

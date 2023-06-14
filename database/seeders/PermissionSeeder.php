@@ -67,12 +67,13 @@ class PermissionSeeder extends Seeder
         ]);
         $user->assignRole($role1);
 
-        Setting::created([
+        Setting::create([
+            'user_id' => $user->id,
             'site_name' => 'ADMIN-PANEL',
             'favicon' => 'assets/images/newlogo.jpg',
             'logo' => 'assets/images/newlogo.jpg',
             'type' => 'Logo',
-            'footer' => '<a href="/">@Welcome TO Our Site</a>',
+            'footer' => '@Welcome TO Our Site',
         ]);
     }
 }

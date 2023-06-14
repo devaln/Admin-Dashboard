@@ -1,12 +1,16 @@
 <div class="card-header">
     <h4>Delete Account</h4>
     <p>Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.</p>
+    <div class="form-group-btn">
+        <button id="delete-user" class="btn btn-mat waves-effect waves-light btn-danger">Delete Account</button>
+    </div>
 </div>
-<button class="btn btn-danger">Delete Account</button>
-<section class="space-y-6">
 
-    <x-modal name="confirm-user-deletion" @show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+
+<div id="modal-user-delete" class="card-body" style="display: none">
+
+    <div class="confirm-user-deletion" focusable>
+        <form method="post" action="{{ route('profile.destroy') }}" class="md-float-material form-material">
             @csrf
             @method('delete')
 
@@ -14,33 +18,33 @@
                 {{ __('Are you sure you want to delete your account?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="p-2 text-sm text-gray-600">
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+            {{-- Email --}}
+            <div class="pass col-lg-4">
+                <div class="form-group form-primary">
+                    <input type="password" name="password" class="form-control" required autofocus>
+                    <span class="form-bar"></span>
+                    <label class="float-label">password</label>
+                    {!! $errors->first(
+                        'password',
+                        '<span class="alert-msg text-danger" aria-hidden="true"><i class="ti-info-alt" aria-hidden="true">
+                        </i> :message</span>',
+                    ) !!}
+                </div>
             </div>
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+            <div class="form-group-btn">
+                <button id="modal-close" type="button" class="btn btn-mat waves-effect waves-light btn-inverse">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </button>
 
-                <x-danger-button class="ml-3">
+                <button type="submit" class="btn btn-mat waves-effect waves-light btn-danger">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </button>
             </div>
         </form>
-    </x-modal>
-</section>
+    </div>
+</div>

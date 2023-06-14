@@ -82,7 +82,7 @@
                                 <div class="input-wrapper">
                                     <div class="custom-input-file-user">
                                         <div class="input-file-wrapper-user p-3">
-                                            <img src="{{ ($setting->favicon)? $setting->favicon : asset('/assets/images/noimage.jpg') }}"
+                                            <img src="{{ $setting->favicon ?? asset('/assets/images/noimage.jpg') }}"
                                                 alt="favicon" id="favicon"
                                                 style="max-width: 160px;max-height: 160px;border: 2px solid black">
                                             <input type="file" onchange="preview2()" accept="image/*" id="site-favicon"
@@ -124,14 +124,6 @@
 
 @section('script')
     <script>
-        $('#profileimg').click(function() {
-            $('#profimg').click();
-        });
-
-        function preview() {
-            profileimg.src = URL.createObjectURL(event.target.files[0]);
-        }
-
         $('#favicon').click(function() {
             $('#site-favicon').click();
         });

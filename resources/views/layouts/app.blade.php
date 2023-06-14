@@ -50,7 +50,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css/css/animate.css') }}">
     {{-- SweetAlert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
 
     @yield('style')
 </head>
@@ -137,7 +136,7 @@
                         </a>
                         @elseif (App\Models\Setting::setting()->type === 'Logo')
                         <a href="{{ route('dashboard') }}">
-                            <img class="img-fluid" src="{{ App\Models\Setting::setting()->logo ?? asset('assets/images/logo.png') }}" alt="site_Logo" width="100px" height="100px"/>
+                            <img class="img-fluid" src="{{ App\Models\Setting::setting()->logo ?? asset('assets/images/logo.png') }}" alt="site_Logo" width="50px" height="50px"/>
                         </a>
                         @else
                         <a href="{{ route('dashboard') }}" class="p-5">
@@ -187,7 +186,7 @@
                                     <li class="waves-effect waves-light">
                                         <div class="media">
                                             <img class="d-flex align-self-center img-radius"
-                                                src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                src="{{ asset('assets/images/avatar-2.jpg') }}" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">John Doe</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
@@ -199,7 +198,7 @@
                                     <li class="waves-effect waves-light">
                                         <div class="media">
                                             <img class="d-flex align-self-center img-radius"
-                                                src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                                src="{{ asset('assets/images/avatar-4.jpg') }}" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">Joseph William</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
@@ -211,7 +210,7 @@
                                     <li class="waves-effect waves-light">
                                         <div class="media">
                                             <img class="d-flex align-self-center img-radius"
-                                                src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                                src="{{ asset('assets/images/avatar-3.jpg') }}" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">Sara Soudein</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
@@ -300,7 +299,7 @@
                             <div class="card mb-0">
                                 <div class="card-block">
                                     <div class="text-center">
-                                        {!! App\Models\Setting::setting()->footer !!}
+                                        <a href="/">{!! App\Models\Setting::setting()->footer !!}</a>
                                     </div>
                                 </div>
                             </div>
@@ -385,7 +384,6 @@
     <!-- custom js -->
     <script type="text/javascript" src="{{ asset('assets/pages/dashboard/custom-dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/script.js')}} "></script>
-    <script type="text/javascript" src="{{ asset('assets/js/deletebutton.js')}} "></script>
     {{-- datatabels --}}
     <script type="text/javascript" src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
@@ -393,11 +391,8 @@
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/pages/notification/notification.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-    {{-- sweetAlert --}}
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="sweetalert2.min.js"></script>
     <!-- Custom js -->
-    {{-- <script type="text/javascript" src="assets/js/script.js"></script> --}}
+    <script src="{{ asset('assets/js/myjquery.js') }}"></script>
     @include('layouts.notification-errors')
 
     @yield('script')
