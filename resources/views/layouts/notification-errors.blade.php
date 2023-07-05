@@ -33,7 +33,7 @@
 
 {{-- danger Message --}}
 @elseif ($message = Session::get('danger'))
-    <script>
+<script>
     $(window).on('load', function() {
         //Welcome Message (not for login page)
         function notify(type) {
@@ -60,9 +60,9 @@
             });
         };
 
-        notify('success');
+        notify('danger');
     });
-    </script>
+</script>
 
 {{-- Primary Message --}}
 @elseif ($message = Session::get('primary'))
@@ -93,7 +93,7 @@
                 });
             };
 
-            notify('success');
+            notify('primary');
         });
     </script>
 
@@ -127,7 +127,7 @@
             });
         };
 
-        notify('success');
+        notify('info');
     });
     </script>
 
@@ -161,7 +161,7 @@
                 });
             };
 
-            notify('success');
+            notify('inverse');
         });
     </script>
 
@@ -195,7 +195,7 @@
                 });
             };
 
-            notify('success');
+            notify('secondary');
         });
     </script>
 

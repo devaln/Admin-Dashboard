@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <div class="form-group-btn float-right">
-                    <a type="button" href="{{ route('users.index') }}"
+                    <a type="button" href="{{ route('dashboard') }}"
                         class="btn btn-mat waves-effect waves-light btn-danger"><i class="ti-close"> Cancel </i></a>
                     <button type="submit" class="btn btn-mat waves-effect waves-light btn-success"><i class="ti-save">
                             Save </i></button>

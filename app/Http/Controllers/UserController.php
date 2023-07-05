@@ -18,10 +18,10 @@ class UserController extends Controller
     */
     function __construct()
     {
-         $this->middleware('can:user list', ['only' => ['index','show']]);
-         $this->middleware('can:user create', ['only' => ['create','store']]);
-         $this->middleware('can:user edit', ['only' => ['edit','update']]);
-         $this->middleware('can:user delete', ['only' => ['destroy']]);
+        $this->middleware('can:user list', ['only' => ['index','show']]);
+        $this->middleware('can:user create', ['only' => ['create','store']]);
+        $this->middleware('can:user edit', ['only' => ['edit','update']]);
+        $this->middleware('can:user delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -136,7 +136,6 @@ class UserController extends Controller
             'last_name' => 'nullable|min:3',
             'phone' => 'nullable|min:10|max:13',
             'email' => 'required|email',
-            'password' => 'required',
             'gender' => 'nullable',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
@@ -157,7 +156,7 @@ class UserController extends Controller
         $user['last_name'] = $request->last_name ?? null;
         $user['phone'] = $request->phone ?? null;
         $user['email'] = $request->email;
-        $user['password'] = ($user->password !== $request->password)? Hash::make($request->password) : $request->password;
+        $user['password'] = $request->password;
         $user['gender'] = $request->gender ?? null;
         $user['date_of_birth'] = $request->date_of_birth ?? null;
 

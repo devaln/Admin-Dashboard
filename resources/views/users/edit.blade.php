@@ -111,18 +111,20 @@
                     </div>
 
                     {{-- Password --}}
+                    @if (!$user->id)
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Password :</label>
                         <div class="col-sm-10">
                             <input type="password" value="{{ old('password', $user->password) }}"
-                                class="form-control col-lg-6" name="password" placeholder="Password" required>
+                            class="form-control col-lg-6" name="password" placeholder="Password" required>
                             {!! $errors->first(
                                 'password',
                                 '<span class="alert-msg text-danger" aria-hidden="true"><i class="ti-info-alt" aria-hidden="true">
-                                </i> :message</span>',
-                            ) !!}
+                                    </i> :message</span>',
+                                ) !!}
                         </div>
                     </div>
+                    @endif
 
                     {{-- Gender --}}
                     <div class="form-group row">

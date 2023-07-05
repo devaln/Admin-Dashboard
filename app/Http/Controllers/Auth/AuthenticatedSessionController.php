@@ -86,7 +86,8 @@ class AuthenticatedSessionController extends Controller
         if(Hash::check($request->get('password'), Auth::user()->password)){
             Session::forget('locked');
             return redirect()->route('dashboard')->with('success', 'Welcome Back');
+        } else {
+            return back()->with('danger', 'Password Is Incorrect');
         }
-        return back()->with('danger', 'Password Is Incorrect');
     }
 }

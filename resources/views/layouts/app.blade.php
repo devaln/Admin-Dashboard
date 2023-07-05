@@ -140,7 +140,7 @@
                         </a>
                         @else
                         <a href="{{ route('dashboard') }}" class="p-5">
-                            <b class="text-bold"> {{ App\Models\Setting::setting()->site_name ?? '' }} </b>
+                            <h6 class="text-bold"> {{ App\Models\Setting::setting()->site_name ?? '' }} </h6>
                         </a>
                         @endif
 
@@ -275,7 +275,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">{{ $title ?? '' }}</h5>
-                                            <p class="m-b-0">Welcome to Mega Able</p>
+                                            <p class="m-b-0">{{ $title ?? '' }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">

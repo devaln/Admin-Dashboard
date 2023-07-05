@@ -34,8 +34,8 @@
             </form>
         </div> --}}
         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li class="active">
+        <ul class="pcoded-item pcoded-left-item" id="menu">
+            <li>
                 <a href="{{ route('dashboard') }}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
@@ -50,21 +50,21 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class="">
+                    <li>
                         <a href="{{ route('users.index') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-user"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Manage Users</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class=" ">
+                    <li>
                         <a href="{{ route('permissions.index') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Permission</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class=" ">
+                    <li>
                         <a href="{{ route('roles.index') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-pencil-alt2"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Roles</span>
