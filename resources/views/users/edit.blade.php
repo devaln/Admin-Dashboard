@@ -178,15 +178,3 @@
         </div>
     </div>
 @endsection
-
-@section('script')
-    <script>
-        $('#profileimg').click(function() {
-            $('#profimg').click();
-        });
-
-        function preview() {
-            profileimg.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
-@endsection

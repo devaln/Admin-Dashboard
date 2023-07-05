@@ -15,13 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-        });
-
-        Schema::create('feilds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('format');
+            $table->string('url');
+            // $table->string('icon');
+            $table->string('route');
         });
     }
 
@@ -31,7 +27,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('feildsets');
-
-        Schema::dropIfExists('feilds');
     }
 };

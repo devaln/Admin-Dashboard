@@ -53,8 +53,8 @@ class SettingController extends Controller
 
         $setting = new Setting();
         $setting['site_name'] = $request->site_name;
-        $setting['favicon'] = ($request->hasFile('favicon'))? $favicon : null;
-        $setting['logo'] = ($request->hasFile('logo'))? $logo: null;
+        $setting['favicon'] = ($request->filled('favicon_removed'))? $favicon : null;
+        $setting['logo'] = ($request->filled('logo_removed'))? $logo: null;
         $setting['type'] = $request->type ?? null;
         $setting['footer'] = $request->footer ?? null;
         $setting['user_id'] = Auth::user()->id;
@@ -75,6 +75,8 @@ class SettingController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'type' => 'nullable',
             'footer' => 'nullable',
+            'logo_removed' => 'nullable',
+            'favicon_removed' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -84,20 +86,25 @@ class SettingController extends Controller
         if ($request->hasFile('favicon')) {
             $favicon = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->favicon->extension();
             $request->favicon->move(public_path('images/setting'), $favicon);
+        } else {
+            $favicon = $setting->favicon;
         }
 
         if ($request->hasFile('logo')) {
             $logo = '/images/setting/' . time() . '.' . uniqid() . '.' . $request->logo->extension();
             $request->logo->move(public_path('images/setting'), $logo);
+        } else {
+            $logo = $setting->logo;
         }
 
         $setting['site_name'] = $request->site_name;
-        $setting['favicon'] = ($request->hasFile('favicon'))? $favicon : $setting->favicon;
-        $setting['logo'] = ($request->hasFile('logo'))? $logo: $setting->logo;
+        $setting['favicon'] = ($request->favicon_removed != null)? null : $favicon;
+        $setting['logo'] = ($request->logo_removed != null)? null : $logo;
         $setting['type'] = $request->type ?? null;
         $setting['footer'] = $request->footer ?? null;
         $setting['user_id'] = Auth::user()->id;
 
+        // dd($setting);
         if ($setting->save()) {
             return back()->with('success', 'Uploaded Successfully');
         }

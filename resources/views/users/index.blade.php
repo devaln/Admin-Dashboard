@@ -53,7 +53,7 @@
                                         @can('user delete')
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" id="delete_button" onclick="confirmdelete()"
+                                        <button type="button" id="delete_button" onclick="return confirm('Do you really want to delete this users!')"
                                             class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-sm">
                                             <i class="ti-trash"></i></button>
                                         @endcan

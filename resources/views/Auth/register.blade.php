@@ -7,7 +7,7 @@
                 <form class="md-float-material form-material" action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="text-center">
-                        <img src="assets/images/logo.png" alt="logo.png">
+                        <img src="{{ App\Models\Setting::setting()->logo ?? 'assets/images/logo.png' }}" alt="logo.png" style="width: 9%;aspect-ratio: 3/2;object-fit: contain">
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">

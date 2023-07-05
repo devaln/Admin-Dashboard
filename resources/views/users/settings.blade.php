@@ -34,7 +34,7 @@
 
                     {{-- logo --}}
                     <div class="form-group row">
-                        <label for="profimg" class="col-sm-2 col-form-label"> Site Logo :</label>
+                        <label class="col-sm-2 col-form-label"> Site Logo :</label>
                         <div class="col-sm-10">
                             <div class="form-item mb-4">
                                 <div class="input-wrapper">
@@ -55,9 +55,23 @@
                         </div>
                     </div>
 
+                    {{-- Remove current logo image --}}
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="checkbox-fade fade-in-primary d-">
+                                <label for="logo_removed">
+                                    <input id="logo_removed" type="checkbox" name="logo_removed">
+                                    <span class="cr"><i
+                                        class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                    <span class="text-inverse">Remove Current Logo Image</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- type --}}
                     <div class="form-group row">
-                        <label for="first_name" class="col-sm-2 col-form-label">First Name :</label>
+                        <label for="first_name" class="col-sm-2 col-form-label">Web Branding Type :</label>
                         <div class="col-sm-10">
                             <select type="text" id="first_name" value="{{ old('first_name', $setting->type) }}"
                                 name="type" placeholder="First Name" required autofocus class="form-control col-lg-6">
@@ -76,7 +90,7 @@
 
                     {{-- favicon --}}
                     <div class="form-group row">
-                        <label for="site-favicon" class="col-sm-2 col-form-label"> Favicon :</label>
+                        <label class="col-sm-2 col-form-label"> Favicon :</label>
                         <div class="col-sm-10">
                             <div class="form-item mb-4">
                                 <div class="input-wrapper">
@@ -93,6 +107,20 @@
                                 </div>
                                 {!! $errors->first('favicon', '<span class="alert-msg text-danger" aria-hidden="true">
                                 <i class="ti-info-alt-circle" aria-hidden="true"></i> :message</span>', ) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Remove current Favicon image --}}
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="checkbox-fade fade-in-primary ">
+                                <label for="favicon_removed">
+                                    <input id="favicon_removed" type="checkbox" name="favicon_removed">
+                                    <span class="cr"><i
+                                        class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                    <span class="text-inverse">Remove Current Favicon Image</span>
+                                </label>
                             </div>
                         </div>
                     </div>

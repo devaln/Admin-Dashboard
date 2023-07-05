@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>{{ $title ?? ''}} :: {{ App\Models\Setting::setting()->site_name ?? 'Admin Pannel' }}</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -20,7 +20,7 @@
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
 
-    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ App\Models\Setting::setting()->favicon ?? asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- Required Fremwork -->

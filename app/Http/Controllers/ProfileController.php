@@ -50,7 +50,6 @@ class ProfileController extends Controller
         $data['last_name'] = $request->last_name ?? null;
         $data['phone'] = $request->phone ?? null;
         $data['email'] = $request->email;
-        $data['password'] = (Auth::user()->password !== $request->password)? Hash::make($request->password) : $request->password;
         $data['gender'] = $request->gender ?? null;
         $data['date_of_birth'] = $request->date_of_birth ?? null;
 
@@ -70,7 +69,7 @@ class ProfileController extends Controller
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
-        
+
         $user = $request->user();
         Auth::logout();
 
