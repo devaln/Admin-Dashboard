@@ -275,3 +275,12 @@ $window.scroll(function () {
         nav.removeClass("active");
     }
 });
+
+$("#menu li a").each(function () {
+    var path = window.location.href;
+    if ($(this).attr("href") == path) {
+        $("#menu li").removeClass("active");
+        $(this).parent().addClass("active");
+        $(this).parent().parent().parent().addClass("active");
+    }
+});

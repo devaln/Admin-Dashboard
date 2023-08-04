@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -91,7 +92,7 @@ class UserController extends Controller
         // dd($request->permissions);
         if ($user->save()) {
             if(! empty($request->permissions)) {
-                $user->assignRoles($request->permissions);
+                $user->assignRole($request->permissions);
             }
             return redirect()->route('users.edit', $user->id)->with('success', 'Profile Updated Successfully');
         }
@@ -134,8 +135,8 @@ class UserController extends Controller
             'first_name' => 'nullable|min:3',
             'middle_name' => 'nullable|min:3',
             'last_name' => 'nullable|min:3',
-            'phone' => 'nullable|min:10|max:13',
-            'email' => 'required|email',
+            'phone' => 'nullable|min:10|max:13|'. Rule::unique('users')->ignore($user),
+            'email' => 'required|email|'. Rule::unique('users')->ignore($user),
             'gender' => 'nullable',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|before:'.Carbon::yesterday(),
@@ -156,7 +157,7 @@ class UserController extends Controller
         $user['last_name'] = $request->last_name ?? null;
         $user['phone'] = $request->phone ?? null;
         $user['email'] = $request->email;
-        $user['password'] = $request->password;
+        $user['password'] = $user->password;
         $user['gender'] = $request->gender ?? null;
         $user['date_of_birth'] = $request->date_of_birth ?? null;
 
